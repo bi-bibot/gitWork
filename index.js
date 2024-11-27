@@ -24,7 +24,9 @@ http.createServer(function(request, response) {
                 })
          
             }
-        else
+        
+    }
+    else
         {
             fs.readFile('index.html', function(error, data)
             {
@@ -41,7 +43,6 @@ http.createServer(function(request, response) {
                 response.end()
             })
         }
-    }
 }).listen(port);
 
 console.log(`Server running at http://localhost:${port}`); 
