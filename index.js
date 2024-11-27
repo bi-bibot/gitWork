@@ -16,9 +16,29 @@ http.createServer(function(request, response) {
             response.write(data);
         }
 
-        response.end()
+        response.end() 
     })
   
 }).listen(port);
 
-console.log(`Server running at http://localhost:${port}`);
+http.get('/listBooks', function(request,response)
+{
+    response.writeHead(200, { 'Content-Type': 'text/html' });
+    fs.readFile('index.html', function(error, data)
+    {
+        if(error)
+        {
+            response.writeHead(404);
+            response.write('Error : File Not Found')
+        }
+        else
+        {
+            response.write(data);
+        }
+
+        response.end() 
+    })
+})
+
+
+console.log(`Server running at http://localhost:${port}`); 
