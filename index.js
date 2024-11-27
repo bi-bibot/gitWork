@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 
 http.createServer(function(request, response) {
 
-    if(request.method == 'GET')
+    if(request.method === 'GET')
     {
         if('/^\/listBooks(\/.*)?$/'.test(req.url))
             {
