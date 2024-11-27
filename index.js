@@ -24,7 +24,7 @@ http.createServer(function(request, response) {
 http.get('/listBooks', function(request,response)
 {
     response.writeHead(200, { 'Content-Type': 'text/html' });
-    fs.readFile('index.html', function(error, data)
+    fs.readFile('listBooks.html', function(error, data)
     {
         if(error)
         {
