@@ -4,42 +4,21 @@ const port = process.env.PORT || 3000;
 
 http.createServer(function(request, response) {
     response.writeHead(200, { 'Content-Type': 'text/html' });
-
-    if(request.url == '/listBooks')
+    fs.readFile('index.html', function(error, data)
     {
-        fs.readFile('listBooks.html', function(error, data)
+        if(error)
         {
-            if(error)
-            {
-                response.writeHead(404);
-                response.write('Error : File Not Found')
-            }
-            else
-            {
-                response.write(data);
-            }
-
-            response.end() 
-        })
-
-    }
-    else
-    {
-        fs.readFile('index.html', function(error, data)
+            response.writeHead(404);
+            response.write('Error : File Not Found')
+        }
+        else
         {
-            if(error)
-            {
-                response.writeHead(404);
-                response.write('Error : File Not Found')
-            }
-            else
-            {
-                response.write(data);
-            }
+            response.write(data);
+        }
 
-            response.end() 
-        })
-    }
+        response.end() 
+    })
+    
 
     
   
