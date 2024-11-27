@@ -20,10 +20,17 @@ http.createServer(function(request, response) {
     })
     
 
+
     
   
 }).listen(port);
 
-http.createServer()
+http.get("/listBooks", (request, response) => {
+    const status = {
+        "Status" : "Runnung"
+    };
+
+    response.write(status);
+})
 
 console.log(`Server running at http://localhost:${port}`); 
