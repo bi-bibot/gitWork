@@ -1,5 +1,5 @@
 const http = require('http');
-const xml2js = require('xml2js');
+const xml2js = require('xml2js').parseString;
 const fs = require('fs');
 const port = process.env.PORT || 8080;
 
@@ -8,26 +8,13 @@ http.createServer(function(request, response) {
 
     if(request.url == '/listBooks')
     {
-        fs.readFile('listBooks.html', function(error, data)
+        
+        var xml = fs.readFileSync('books.xml', 'utf8')
+        xml2js(xml, function(error, result)
         {
-            if(error)
-            {
-                response.writeHead(404);
-                response.write('Error : File Not Found')
-            }
-            else
-            {
-                
-                response.write(data);
-            }
-
-            response.end() 
-        })
-
-        var xml = fs.readFileSync('books.xml', 'utf8');
-        var result = convert.xml2json(xml, {compact: true, spaces: 4});
-        response.write(result);
-
+            response.write(JSON.stringify(result));
+        });
+        response.end() 
 
     }
     else
