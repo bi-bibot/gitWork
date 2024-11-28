@@ -2,49 +2,38 @@ const http = require('http');
 const fs = require('fs');
 const port = process.env.PORT || 3000;
 
-http.createServer(function(request, response) {
-    response.writeHead(200, { 'Content-Type': 'text/html' });
+const postData = JSON.stringify({
+  'msg': 'Hello World!',
+});
 
-    if(request.url == '/listBooks')
-    {
-        fs.readFile('listBooks.html', function(error, data)
-        {
-            if(error)
-            {
-                response.writeHead(404);
-                response.write('Error : File Not Found')
-            }
-            else
-            {
-                response.write(data);
-            }
+const options = {
+  port: process.env.PORT || 3000,
+  path: '/upload',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Content-Length': Buffer.byteLength(postData),
+  },
+};
 
-            response.end() 
-        })
+const req = http.request(options, (res) => {
+  console.log(`STATUS: ${res.statusCode}`);
+  console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+  res.setEncoding('utf8');
+  res.on('data', (chunk) => {
+    console.log(`BODY: ${chunk}`);
+  });
+  res.on('end', () => {
+    console.log('No more data in response.');
+  });
+});
 
-    }
-    else
-    {
-        fs.readFile('index.html', function(error, data)
-        {
-            if(error)
-            {
-                response.writeHead(404);
-                response.write('Error : File Not Found')
-            }
-            else
-            {
-                response.write(data);
-            }
+req.on('error', (e) => {
+  console.error(`problem with request: ${e.message}`);
+});
 
-            response.end() 
-        })
-    }
-
-    
-  
-}).listen(port);
-
-http.createServer()
+// Write data to request body
+req.write(postData);
+req.end();
 
 console.log(`Server running at http://localhost:${port}`); 
