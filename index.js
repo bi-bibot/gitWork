@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const port = process.env.PORT || 3000;
 
-http.get('https://brofuckingwork.azurewebsites.net/listBooks', (res) => {
+http.get('https://brofuckingwork.azurewebsites.net', (res) => {
     const { statusCode } = res;
     const contentType = res.headers['content-type'];
   
@@ -16,7 +16,7 @@ http.get('https://brofuckingwork.azurewebsites.net/listBooks', (res) => {
       error = new Error('Invalid content-type.\n' +
                         `Expected application/json but received ${contentType}`);
     }
-    
+
     if (error) {
       console.error(error.message);
       // Consume response data to free up memory
