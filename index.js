@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const port = process.env.PORT || 3000;
 
-http.createServer(function(request, response) {
+http.get(function(request, response) {
     response.writeHead(200, { 'Content-Type': 'text/html' });
 
     if(request.url == '/listBooks')
