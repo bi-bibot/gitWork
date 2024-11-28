@@ -18,7 +18,7 @@ http.createServer(function(request, response) {
             else
             {
                 
-                response.write(result);
+                response.write(data);
             }
 
             response.end() 
@@ -26,7 +26,7 @@ http.createServer(function(request, response) {
 
         var xml = fs.readFileSync('books.xml', 'utf8');
         var result = convert.xml2json(xml, {compact: true, spaces: 4});
-
+        response.write(result);
 
 
     }
