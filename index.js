@@ -1,5 +1,5 @@
 const http = require('http');
-
+const xmlParser = require('xml2json');
 const fs = require('fs');
 const port = process.env.PORT || 3000;
 
@@ -45,7 +45,5 @@ http.createServer(function(request, response) {
     
   
 }).listen(port);
-
-http.createServer()
 
 console.log(`Server running at http://localhost:${port}`); 
