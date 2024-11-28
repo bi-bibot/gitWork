@@ -17,15 +17,17 @@ http.createServer(function(request, response) {
             }
             else
             {
-                var xml = require('fs').readFileSync('books.xml', 'utf8');
-                var result = convert.xml2json(xml, {compact: true, spaces: 4});
-
-
+                
                 response.write(result);
             }
 
             response.end() 
         })
+
+        var xml = fs.readFileSync('books.xml', 'utf8');
+        var result = convert.xml2json(xml, {compact: true, spaces: 4});
+
+
 
     }
     else
